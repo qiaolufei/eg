@@ -93,6 +93,9 @@ export default {
           }
         })
     }
+  },
+  mounted () {
+    this.getdata()
   }
 }
 </script>

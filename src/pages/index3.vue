@@ -9,7 +9,7 @@
             show-stops
             :min="1998"
             :max="2020"
-            @change="getdata"
+            @change="getdata2"
             :marks="yearmarks">
             </el-slider>
         </div>
@@ -20,7 +20,7 @@
             range
             show-stops
             :max="2880"
-            @change="getdata"
+            @change="getdata2"
             :marks="timemarks">
             </el-slider>
         </div>
@@ -31,7 +31,7 @@
         show-stops
         :min='51'
         :max='190'
-        @change='getdata1'
+        @change='getdata2'
         :marks='bustmarks'>
         </el-slider></div>
         <div class='index3__title'>臀围：<el-slider
@@ -41,7 +41,7 @@
         show-stops
         :min='43'
         :max='190'
-        @change='getdata1'
+        @change='getdata2'
         :marks='hiplinemarks'>
         </el-slider></div>
         <div class='index3__title'>腰围：<el-slider
@@ -51,7 +51,7 @@
         show-stops
         :min='47'
         :max='190'
-        @change='getdata1'
+        @change='getdata2'
         :marks='waistmarks'>
         </el-slider></div>
         <div class='index3__title'>身高：<el-slider
@@ -61,7 +61,7 @@
         show-stops
         :min='0'
         :max='190'
-        @change='getdata1'
+        @change='getdata2'
         :marks='heightmarks'>
         </el-slider></div>
         <div class='index3__title'>罩杯：<el-slider
@@ -71,7 +71,7 @@
         show-stops
         :min='1'
         :max='26'
-        @change='getdata1'
+        @change='getdata2'
         :format-tooltip='formatTooltip'
         :marks='cupmarks'>
         </el-slider></div>
@@ -82,7 +82,7 @@
         show-stops
         :min='1980'
         :max='2019'
-        @change='getdata1'
+        @change='getdata2'
         :marks='agemarks'>
         </el-slider></div>
         <hr>
@@ -152,7 +152,7 @@ export default {
     }
   },
   methods: {
-    getdata1 () {
+    getdata2 () {
       let params = {
         'shichangfrom': this.time[0],
         'shicgangto': this.time[1],
@@ -194,7 +194,7 @@ export default {
     }
   },
   mounted () {
-    this.getdata1()
+    this.getdata2()
   }
 }
 </script>
