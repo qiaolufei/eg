@@ -1,6 +1,6 @@
 <template>
     <div class="headbar">
-        <nav class="navbar navbar-default" role="navigation">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
     <div class="navbar-header">
         <a class="navbar-brand" href="#">科学研究</a>
@@ -23,8 +23,5 @@ export default {
 
 <style lang="less" scoped>
 .headbar{
-    width: 100%;
-    position: fixed;
-    top: 0;
 }
 </style>

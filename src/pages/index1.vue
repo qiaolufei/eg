@@ -29,17 +29,29 @@
                 <option v-for="i of sort" :key="i" :value ="i">{{i}}</option>
             </select>
             </div>
+            <hr>
+            <div>
+                <div v-for="i of eg" :key="i._id" class="list">
+                    <!-- <img :src="[i.img]">
+                    <br>
+                    演员：{{i.name}}
+                    <br>
+                    <a :href="[i._id]" target="_blank">链接</a> -->
+                </div>
+            </div>
     </div>
 </template>
 <script>
 import headpage from '@/components/headbar'
-// import qs from 'qs'
+import axios from 'axios'
+import qs from 'qs'
 export default {
   components: {
     headpage
   },
   data () {
     return {
+      eg: [],
       year: [1998, 2020],
       time: [0, 2880],
       i: '',
@@ -56,7 +68,30 @@ export default {
   },
   methods: {
     getdata () {
-      console.log(this.year + this.time + this.i)
+      let params = {
+        'shichangfrom': this.time[0],
+        'shicgangto': this.time[1],
+        'faxingriqifrom': this.year[0],
+        'faxingriqito': this.year[1],
+        'leibie': this.i
+      }
+      axios
+        .get('/api/XXX', qs.stringify(params))
+        .then(response => {
+          let length = response.data.data.length
+          for (let i = length - 1; i >= 0; i--) {
+            let _id = response.data.data[i]._id
+            let leibie = response.data.data[i].leibie
+            let name = response.data.data[i].識別碼
+            let l = response.data.data[i].長度 + '分钟'
+            let map = {}
+            map['_id'] = _id
+            map['leibie'] = leibie
+            map['name'] = name
+            map['l'] = l
+            this.eg.push(map)
+          }
+        })
     }
   }
 }
@@ -73,5 +108,15 @@ export default {
             margin-left: 5%
         }
     }
+}
+.list{
+  display: inline-block;
+  margin: 1% 0 0 1%;
+  text-align: center;
+  border: 1px solid grey;
+  border-radius: 3px;
+  width: 4%;
+  height: 150px;
+  font-size: 12px;
 }
 </style>

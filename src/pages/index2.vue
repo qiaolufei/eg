@@ -64,7 +64,7 @@
         </el-slider></div>
         <hr>
         <div>
-        <div v-for="i of eg" :key="i.id" class="list">
+        <div v-for="i of eg" :key="i._id" class="list">
           <img :src="[i.img]">
           <br>
           演员：{{i.name}}
@@ -196,7 +196,7 @@ export default {
       }
       console.log(qs.stringify(params))
       axios
-        .get('/api/XXX', qs.stringify(params))
+        .get('/api/filter_actress', qs.stringify(params))
         .then(response => {
           let length = response.data.data.length
           for (let i = length - 1; i >= 0; i--) {
