@@ -7,9 +7,9 @@
     </div>
     <div>
         <ul class="nav navbar-nav">
-            <li><router-link to="/">index1</router-link></li>
-            <li><router-link to="/index2">index2</router-link></li>
-            <li><router-link to="/index3">index3</router-link></li>
+            <li><router-link to="/">影片</router-link></li>
+            <li><router-link to="/index2">演员</router-link></li>
+            <li><router-link to="/index3">影片+演员</router-link></li>
         </ul>
     </div>
     </div>
@@ -22,6 +22,4 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.headbar{
-}
 </style>

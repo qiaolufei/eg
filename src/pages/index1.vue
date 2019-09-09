@@ -2,42 +2,55 @@
     <div class="index1">
         <headpage></headpage>
             <div class="index1__title">
-            影片发行年份：<el-slider
-            class="index1__title-option"
-            v-model="year"
-            range
-            show-stops
-            :min="1998"
-            :max="2020"
-            @change="getdata"
-            :marks="yearmarks">
-            </el-slider>
+              影片发行年份：<el-slider
+              class="index1__title-option"
+              v-model="year"
+              range
+              show-stops
+              :min="1998"
+              :max="2020"
+              @change="getdata"
+              :marks="yearmarks">
+              </el-slider>
             </div>
             <div class="index1__title">
-            影片长度（分钟）：<el-slider
-            class="index1__title-option"
-            v-model="time"
-            range
-            show-stops
-            :max="2880"
-            @change="getdata"
-            :marks="timemarks">
-            </el-slider>
+              影片长度（分钟）：<el-slider
+              class="index1__title-option"
+              v-model="time"
+              range
+              show-stops
+              :max="2880"
+              @change="getdata"
+              :marks="timemarks">
+              </el-slider>
             </div>
             <div class="index1__title">
-            <select @change="getdata" v-model="i">
-                <option v-for="i of sort" :key="i" :value ="i">{{i}}</option>
-            </select>
+              <el-checkbox-group @change="getdata" v-model="sortList">
+                    <el-checkbox v-for="i of sort" :key="i" :label="i">{{i}}</el-checkbox>
+              </el-checkbox-group>
+            </div>
+            <hr>
+            <div class='index1__title'>
+              页码：<el-slider
+              class='index1__title-option'
+              v-model="page"
+              show-stops
+              :min='1'
+              @change='getdata'
+              show-input>
+              </el-slider>
             </div>
             <hr>
             <div>
-                <div v-for="i of eg" :key="i._id" class="list">
-                    <!-- <img :src="[i.img]">
-                    <br>
-                    演员：{{i.name}}
-                    <br>
-                    <a :href="[i._id]" target="_blank">链接</a> -->
-                </div>
+              <div v-for="i of eg" :key="i._id" class="list">
+                番号：{{i.name}}
+                <br>
+                时长：{{i.l}}
+                <br>
+                <span v-for="s of i.leibie" :key="s" style="margin-left:1%;background-color:aquamarine">{{s}}</span>
+                <br>
+                <a :href="[i._id]" target="_blank">链接</a>
+              </div>
             </div>
     </div>
 </template>
@@ -52,9 +65,11 @@ export default {
   data () {
     return {
       eg: [],
+      page: 1,
       year: [1998, 2020],
+      currentPage1: 1,
       time: [0, 2880],
-      i: '',
+      sortList: [],
       yearmarks: {
         1998: '1988',
         2020: '2020'
@@ -68,22 +83,26 @@ export default {
   },
   methods: {
     getdata () {
+      this.eg = []
       let params = {
+        'page': this.page,
         'shichangfrom': this.time[0],
         'shicgangto': this.time[1],
         'faxingriqifrom': this.year[0],
         'faxingriqito': this.year[1],
-        'leibie': this.i
+        'leibie': this.sortList.toString()
       }
+      console.log(qs.stringify(params))
       axios
-        .get('/api/XXX', qs.stringify(params))
+        .get('/api/XXX?' + qs.stringify(params))
         .then(response => {
-          let length = response.data.data.length
+          console.log(response)
+          let length = response.data.length
           for (let i = length - 1; i >= 0; i--) {
-            let _id = response.data.data[i]._id
-            let leibie = response.data.data[i].leibie
-            let name = response.data.data[i].識別碼
-            let l = response.data.data[i].長度 + '分钟'
+            let _id = response.data[i]._id // 地址
+            let leibie = response.data[i].leibie // 类别
+            let name = response.data[i].識別碼 // 番号
+            let l = response.data[i].長度 + '分钟' // 时长
             let map = {}
             map['_id'] = _id
             map['leibie'] = leibie
@@ -114,12 +133,10 @@ export default {
 }
 .list{
   display: inline-block;
-  margin: 1% 0 0 1%;
+  margin: 1% 0 0 4%;
   text-align: center;
   border: 1px solid grey;
   border-radius: 3px;
-  width: 4%;
-  height: 150px;
-  font-size: 12px;
+  width: 15%;
 }
 </style>

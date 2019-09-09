@@ -1,76 +1,99 @@
 <template>
     <div class='index2'>
         <headpage></headpage>
-        <div class='index2__title'>胸围：<el-slider
-        class='index2__title-option'
-        v-model='bust'
-        range
-        show-stops
-        :min='51'
-        :max='190'
-        @change='getdata1'
-        :marks='bustmarks'>
-        </el-slider></div>
-        <div class='index2__title'>臀围：<el-slider
-        class='index2__title-option'
-        v-model='hipline'
-        range
-        show-stops
-        :min='43'
-        :max='190'
-        @change='getdata1'
-        :marks='hiplinemarks'>
-        </el-slider></div>
-        <div class='index2__title'>腰围：<el-slider
-        class='index2__title-option'
-        v-model='waist'
-        range
-        show-stops
-        :min='47'
-        :max='190'
-        @change='getdata1'
-        :marks='waistmarks'>
-        </el-slider></div>
-        <div class='index2__title'>身高：<el-slider
-        class='index2__title-option'
-        v-model='height'
-        range
-        show-stops
-        :min='0'
-        :max='190'
-        @change='getdata1'
-        :marks='heightmarks'>
-        </el-slider></div>
-        <div class='index2__title'>罩杯：<el-slider
-        class='index2__title-option'
-        v-model='cup'
-        range
-        show-stops
-        :min='1'
-        :max='26'
-        @change='getdata1'
-        :format-tooltip='formatTooltip'
-        :marks='cupmarks'>
-        </el-slider></div>
-        <div class='index2__title'>生日年份：<el-slider
-        class='index2__title-option'
-        v-model='age'
-        range
-        show-stops
-        :min='1980'
-        :max='2019'
-        @change='getdata1'
-        :marks='agemarks'>
-        </el-slider></div>
+        <div class='index2__title'>
+          胸围：<el-slider
+          class='index2__title-option'
+          v-model='bust'
+          range
+          show-stops
+          :min='51'
+          :max='190'
+          @change='getdata1'
+          :marks='bustmarks'>
+          </el-slider>
+        </div>
+        <div class='index2__title'>
+          臀围：<el-slider
+          class='index2__title-option'
+          v-model='hipline'
+          range
+          show-stops
+          :min='43'
+          :max='190'
+          @change='getdata1'
+          :marks='hiplinemarks'>
+          </el-slider>
+        </div>
+        <div class='index2__title'>
+          腰围：<el-slider
+          class='index2__title-option'
+          v-model='waist'
+          range
+          show-stops
+          :min='47'
+          :max='190'
+          @change='getdata1'
+          :marks='waistmarks'>
+          </el-slider>
+        </div>
+        <div class='index2__title'>
+          身高：<el-slider
+          class='index2__title-option'
+          v-model='height'
+          range
+          show-stops
+          :min='0'
+          :max='190'
+          @change='getdata1'
+          :marks='heightmarks'>
+          </el-slider>
+        </div>
+        <div class='index2__title'>
+          罩杯：<el-slider
+          class='index2__title-option'
+          v-model='cup'
+          range
+          show-stops
+          :min='1'
+          :max='26'
+          @change='getdata1'
+          :format-tooltip='formatTooltip'
+          :marks='cupmarks'>
+          </el-slider>
+        </div>
+        <div class='index2__title'>
+          生日年份：<el-slider
+          class='index2__title-option'
+          v-model='age'
+          range
+          show-stops
+          :min='1980'
+          :max='2019'
+          @change='getdata1'
+          :marks='agemarks'>
+          </el-slider>
+        </div>
+        <hr>
+          <div class='index2__title'>
+            页码：<el-slider
+            class='index2__title-option'
+            v-model="page"
+            show-stops
+            :min='1'
+            @change='getdata1'
+            show-input>
+            </el-slider>
+          </div>
         <hr>
         <div>
-        <div v-for="i of eg" :key="i._id" class="list">
-          <img :src="[i.img]">
-          <br>
-          演员：{{i.name}}
-          <br>
-          <a :href="[i._id]" target="_blank">链接</a>
-        </div>
+          <div v-for="i of eg" :key="i._id" class="list">
+            <img :src="[i.img]">
+            <br>
+            演员：{{i.name}}
+            <br>
+            <a :href="[i._id]" target="_blank">链接</a>
+          </div>
         </div>
         <br>
     </div>
@@ -85,67 +108,8 @@ export default {
   },
   data () {
     return {
-      eg: [ {
-        '_id': 'https://www.javbus.com/star/rjm',
-        'img': 'https://pics.javbus.com/actress/rjm_a.jpg',
-        'name': '咲野の花',
-        '出生地': '東京都',
-        '年齡': 22,
-        '愛好': 'スプラトゥーン、ダーツ',
-        '生日': 'Wed, 12 Feb 1997 00:00:00 GMT',
-        '罩杯': 'E',
-        '胸圍': 85,
-        '腰圍': 57,
-        '臀圍': 84,
-        '身高': 160
-      },
-      {
-        '_id': 'https://www.javbus.com/star/qh0',
-        'img': 'https://pics.javbus.com/actress/qh0_a.jpg',
-        'name': '八神さおり',
-        '出生地': '三重県',
-        '罩杯': 'H',
-        '胸圍': 96,
-        '腰圍': 60,
-        '臀圍': 88,
-        '身高': 155
-      },
-      {
-        '_id': 'https://www.javbus.com/star/qh0',
-        'img': 'https://pics.javbus.com/actress/qh0_a.jpg',
-        'name': '八神さおり',
-        '出生地': '三重県',
-        '罩杯': 'H',
-        '胸圍': 96,
-        '腰圍': 60,
-        '臀圍': 88,
-        '身高': 155
-      },
-      {
-        '_id': 'https://www.javbus.com/star/qh0',
-        'img': 'https://pics.javbus.com/actress/qh0_a.jpg',
-        'name': '八神さおり',
-        '出生地': '三重県',
-        '罩杯': 'H',
-        '胸圍': 96,
-        '腰圍': 60,
-        '臀圍': 88,
-        '身高': 155
-      },
-      {
-        '_id': 'https://www.javbus.com/star/1wp',
-        'img': 'https://pics.javbus.com/actress/1wp_a.jpg',
-        'name': '水城奈緒',
-        '出生地': '東京都',
-        '年齡': 34,
-        '愛好': '茶道、華道',
-        '生日': 'Tue, 18 Sep 1984 00:00:00 GMT',
-        '罩杯': 'G',
-        '胸圍': 90,
-        '腰圍': 58,
-        '臀圍': 87,
-        '身高': 159
-      }],
+      eg: [],
+      page: 1,
       bust: [51, 190],
       hipline: [43, 190],
       waist: [47, 190],
@@ -180,7 +144,9 @@ export default {
   },
   methods: {
     getdata1 () {
+      this.eg = []
       let params = {
+        'page': this.page,
         'xiongweifrom': this.bust[0],
         'xiongweito': this.bust[1],
         'tunweifrom': this.hipline[0],
@@ -196,13 +162,13 @@ export default {
       }
       console.log(qs.stringify(params))
       axios
-        .get('/api/filter_actress', qs.stringify(params))
+        .get('/api/filter_actress?' + qs.stringify(params))
         .then(response => {
-          let length = response.data.data.length
+          let length = response.data.length
           for (let i = length - 1; i >= 0; i--) {
-            let _id = response.data.data[i]._id
-            let img = response.data.data[i].img
-            let name = response.data.data[i].name
+            let _id = response.data[i]._id
+            let img = response.data[i].img
+            let name = response.data[i].name
             let map = {}
             map['_id'] = _id
             map['img'] = img
@@ -236,13 +202,11 @@ export default {
 }
 .list{
   display: inline-block;
-  margin: 1% 0 0 1%;
+  margin: 1% 0 0 4%;
   text-align: center;
   border: 1px solid grey;
   border-radius: 3px;
-  width: 4%;
-  height: 150px;
-  font-size: 12px;
+  width: 15%;
 }
 img{
   width:80%;
