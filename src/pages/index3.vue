@@ -111,6 +111,8 @@
         <hr>
         <div>
           <div v-for="i of eg" :key="i._id" class="list">
+              <img :src="[i.url]">
+              <br>
               番号：{{i.name}}
               <br>
               时长：{{i.l}}
@@ -200,7 +202,7 @@ export default {
       }
       console.log(qs.stringify(params))
       axios
-        .get('/api/XXX?' + qs.stringify(params))
+        .get('/api/filter_actressav?' + qs.stringify(params))
         .then(response => {
           console.log(response)
           let length = response.data.length
@@ -209,11 +211,13 @@ export default {
             let leibie = response.data[i].leibie // 类别
             let name = response.data[i].識別碼 // 番号
             let l = response.data[i].長度 + '分钟' // 时长
+            let url = response.data[i].img
             let map = {}
             map['_id'] = _id
             map['leibie'] = leibie
             map['name'] = name
             map['l'] = l
+            map['url'] = url
             this.eg.push(map)
           }
         })
